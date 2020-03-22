@@ -1,9 +1,9 @@
 *.bin
 *.elf
-obj_arm/*
-!obj_arm/.keep
+build/
+!*.keep
 *.d
 *.idb
 .*.swp
-*.out
+*.o
 shofel2_t124
