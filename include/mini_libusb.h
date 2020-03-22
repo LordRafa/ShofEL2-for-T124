@@ -20,24 +20,12 @@
 
 #define USB_BULK_TIMEOUT 500
 
-#define SYSFS_MOUNT_PATH	"/sys"
-#define SYSFS_DEVICE_PATH	SYSFS_MOUNT_PATH "/bus/usb/devices"
-
 #if DEBUG
     #define DEBUG_MSG(fmt, ...) do { fprintf( stderr, "%s:%d:%s(): " fmt, \
                                 __FILE__, __LINE__, __func__, ##__VA_ARGS__ ); } while(0)
 #else
     #define DEBUG_MSG(fmt, ...) 
 #endif
-
-struct setup_data {
-	uint8_t bRequestType;
-	uint8_t bRequest;
-	uint16_t wValue;
-	uint16_t wIndex;
-	uint16_t wLength;
-	uint8_t data[];
-};
 
 int usb_open_by_vid_pid( uint16_t vid, uint16_t pid, uint8_t wait );
 int usb_close( int usb );
