@@ -1,6 +1,6 @@
 CFLAGS := -Wall -Werror -I include -MMD
 
-all: shofel2_t124 reset_example.bin jtag_example.bin
+all: shofel2_t124 reset_example.bin jtag_example.bin intermezzo.bin
 
 # --------- x86 ----------
 
@@ -16,7 +16,6 @@ build/obj_x86/%.o: exploit/%.c
 
 shofel2_t124: $(OBJ_FILES_x86)
 	$(CC_x86) $(CFLAGS_x86) -o $@ $^
-
 
 # ------------------------
 
@@ -45,6 +44,9 @@ build/reset_example.elf: build/obj_arm/reset_example.o
 build/jtag_example.elf: build/obj_arm/jtag_example.o 
 	$(CC_ARM) $(CFLAGS_ARM) -o $@ $^
 
+build/intermezzo.elf: build/obj_arm/intermezzo.o 
+	$(CC_ARM) $(CFLAGS_ARM) -o $@ $^
+
 %.bin: build/%.elf
 	$(OBJCOPY_ARM) -O binary $< $@
 
@@ -53,5 +55,5 @@ build/jtag_example.elf: build/obj_arm/jtag_example.o
 
 clean:
 	rm -f $(OBJ_FILES_ARM) $(OBJ_FILES_x86)
-	rm -f shofel2_t124 reset_example.bin build/reset_example.elf jtag_example.bin build/jtag_example.elf
+	rm -f shofel2_t124 reset_example.bin build/reset_example.elf jtag_example.bin build/jtag_example.elf intermezzo.bin build/intermezzo.elf
 
