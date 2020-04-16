@@ -4,8 +4,13 @@
 #define JETSON_TK1_VID 0x0955
 #define JETSON_TK1_PID 0x7140
 
+
+#define IRAM_BEGIN              0x40000000
+#define IRAM_END                0x40040000
+
 #define BOOTROM_USB_BUF_1       0x40004000
 #define BOOTROM_USB_BUF_2       0x40008000
+#define BOOTROM_PAYLOAD_ENTRY   0x4000E000
 #define BOOTROM_SMASH_TARGET    0x4000DCD8
 #define BOOTROM_SMASH_LEN       (BOOTROM_SMASH_TARGET - BOOTROM_USB_BUF_2)
 
@@ -13,15 +18,6 @@
 #define RCM_EP1_OUT     0x01
 #define RCM_CHIP_ID_LEN 0x10
 
-#ifdef __BYTE_ORDER
-    #if __BYTE_ORDER == __BIG_ENDIAN 
-        #define RCM_CMD_LEN 0x74220300 // 0x32274 Bytes
-        #define RCM_CMD_PAYLOAD_ENTRY 0x01E00040 // 0x4000E000|1 (|1 Thumb mode bit)
-    #elif __BYTE_ORDER == __LITTLE_ENDIAN
-        #define RCM_CMD_LEN 0x32274 // 0x32274 Bytes
-        #define RCM_CMD_PAYLOAD_ENTRY 0x4000E001 // 0x4000E000|1 (|1 Thumb mode bit)
-    #endif
-#endif
 
 #define RCM_CMD_BUF_LEN 0x7000
 #define RCM_CMD_BUF_LEN 0x7000

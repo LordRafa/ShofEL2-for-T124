@@ -1,13 +1,4 @@
-typedef unsigned int u32;
-typedef volatile u32 vu32;
-typedef u32 uintptr_t;
-
-extern u32 __romhax_start;
-extern u32 __bss_start;
-extern u32 __bss_end;
-extern u32 __got_start;
-extern u32 __got_end;
-extern u32 __romhax_end;
+#include "types.h"
 
 static inline u32 read32(uintptr_t addr) {
     return *(vu32 *)addr;

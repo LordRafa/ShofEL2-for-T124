@@ -30,7 +30,7 @@ OBJCOPY_ARM = $(TOOLCHAIN_ARM)objcopy
 CFLAGS_ARM := $(CFLAGS) -march=armv4t -mthumb -Os -ffreestanding \
 	-fno-common	-fomit-frame-pointer -nostdlib -fno-builtin-printf \
 	-fno-asynchronous-unwind-tables -fPIE -fno-builtin -fno-exceptions \
-	-Wl,--no-dynamic-linker,--build-id=none,-T,payloads/romhax.ld
+	-Wl,--no-dynamic-linker,--build-id=none,-T,payloads/payload.ld
 # shameless copypasta from https://stackoverflow.com/a/2908351/375416
 C_FILES_ARM := $(wildcard payloads/*.c)
 OBJ_FILES_ARM := $(addprefix build/obj_arm/,$(notdir $(C_FILES_ARM:.c=.o)))
