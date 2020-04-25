@@ -5,7 +5,7 @@ all: shofel2_t124 reset_example.bin jtag_example.bin intermezzo.bin reset_long_b
 # --------- x86 ----------
 
 CC_x86 = gcc
-CFLAGS_x86 := $(CFLAGS)
+CFLAGS_x86 := $(CFLAGS) -lcurl
 # shameless copypasta from https://stackoverflow.com/a/2908351/375416
 C_FILES_x86:= $(wildcard exploit/*.c)
 OBJ_FILES_x86 := $(addprefix build/obj_x86/,$(notdir $(C_FILES_x86:.c=.o)))
