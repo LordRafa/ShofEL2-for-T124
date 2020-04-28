@@ -1,23 +1,23 @@
 #include "types.h"
 #include "t124.h"
 
-typedef int (*ep1_in_imm_t)( void *buffer, u32 size, u32 *num_xfer );
+typedef void (*do_normal_boot_t)( void );
 
+void memcpy( void *dst, const void *src, size_t len ) {
+
+    for ( size_t i = 0; i < len; i++ ) {
+        ( (u8 *)dst )[i] = ( (u8 *)src )[i];
+    }
+
+}
 
 __attribute__((section(".init")))
 void entry() {
 
+    memcpy( (void*) ( IRAM_END - IROM_LEN + 1 ), (void*) IROM_BEGIN, IROM_LEN );
 
-    register ep1_in_imm_t ep1_in_imm = (ep1_in_imm_t) ( *( (u32 *) IRAM_ADD_TRANSPORT_ADD ) | 1 );
-
-    register u32 *mio = (u32*) 0x4003FFF8;
-
-    *mio = 0xFAFA;
-
-
-    static u32 num_xfer;
-    static char buffer[32] = "WOLOLO";
-    ep1_in_imm( buffer, 7, &num_xfer );
+    register do_normal_boot_t do_normal_boot = (do_normal_boot_t) ( BOOTROM_DO_BOOT | 1 );
+    do_normal_boot();
     while(1);
 
 }
